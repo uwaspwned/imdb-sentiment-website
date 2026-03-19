@@ -48,7 +48,9 @@ cd imdb-sentiment-analysis/imdb-model-gui
 # 2. Create virtual environment
 python -m venv .venv
 source .venv/bin/activate  # for Linux/Mac
+
 # or
+
 .venv\Scripts\activate     # for Windows
 
 # 3. Install dependencies
@@ -62,8 +64,9 @@ uvicorn main:app --reload
 
 # 6. In another terminal, run Gradio
 python gradio_app.py
+```
 
-## Run with Docker (recommended)
+### Run with Docker (recommended)
 
 ```bash
 # 1. Clone the repository
