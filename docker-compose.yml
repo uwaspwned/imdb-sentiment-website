@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    container_name: imdb-fastapi
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./app:/app
+    networks:
+      - imdb-network
+
+  gradio:
+    build: .
+    container_name: imdb-gradio
+    ports:
+      - "7860:7860"
+    command: python gradio_app.py
+    depends_on:
+      - fastapi
+    environment:
+      - FASTAPI_URL=http://fastapi:8000
+    volumes:
+      - ./app:/app
+    networks:
+      - imdb-network
+
+networks:
+  imdb-network:
+    driver: bridge
